@@ -94,45 +94,7 @@ These observations are used to estimate the evolving risk state of the environme
 
 ---
 
-## Method Summary
 
-### Instantaneous Risk Observation
-
-For each location in the workspace, EnvGuard estimates the probability of environmental risk:
-
-```math
-\hat{Y}_t(\xi) = p(r_t(\xi)=1 \mid z_t)
-```
-
-where `z_t` represents the synchronized environment-mounted camera and sensor observations.
-
-### Bayesian Latent Risk Belief
-
-Instead of directly reacting to noisy instantaneous predictions, EnvGuard maintains a filtered belief:
-
-```math
-b_t(\xi) = p(r_t(\xi)=1 \mid \hat{Y}_{1:t})
-```
-
-This belief represents the temporally stable probability that a location is unsafe.
-
-### Risk Costmap
-
-The belief is converted into a planning-compatible risk cost:
-
-```math
-C_r(\xi) = -\log(1 - b_t(\xi) + \epsilon)
-```
-
-### Total Planning Cost
-
-The final navigation cost combines the standard map cost and the risk cost:
-
-```math
-C_{\text{total}}(\xi) = C_{\text{map}}(\xi) + \lambda C_r(\xi)
-```
-
----
 
 ## Experimental Highlights
 
@@ -147,22 +109,8 @@ The testbed included:
 - physical rover traversal experiments,
 - online replanning events.
 
-### Quantitative Results
 
-| Method | Success Rate ↑ | Hazard Exposure ↓ | Replans ↓ |
-|---|---:|---:|---:|
-| NoRisk | 0.82 | 42.5 s | 0.4 |
-| Reactive | 0.88 | 28.3 s | 4.7 |
-| Probabilistic | 0.90 | 19.8 s | 3.9 |
-| **EnvGuard** | **0.95** | **12.8 s** | **2.1** |
 
-EnvGuard achieved:
-
-- higher mission success,
-- lower hazard exposure,
-- fewer unnecessary replanning events,
-- stable risk belief under noisy sensing,
-- proactive navigation before entering unsafe regions.
 
 ---
 
@@ -261,28 +209,6 @@ If you use this work, please cite:
 
 ---
 
-## Authors
-
-**Palash Yuvraj Ingle**  
-Department of Computer Information and Security  
-Sejong University, Seoul, South Korea  
-Email: palash@sejong.ac.kr  
-
-**Young-Gab Kim**  
-Department of Computer and Information Security  
-Department of Convergence Engineering for Intelligent Drone  
-Sejong University, Seoul, South Korea  
-Email: alwaysgabi@sejong.ac.kr  
-
-**Corresponding Author:** Young-Gab Kim
-
----
-
-## Acknowledgment
-
-This work was supported in part by the Institute of Information and Communications Technology Planning and Evaluation (IITP) grant funded by the Korea Government (MSIT), and in part by the National Research Foundation of Korea (NRF) grant funded by the Korea Government (MSIT).
-
----
 
 ## License
 
@@ -290,13 +216,4 @@ The license will be updated soon.
 
 Until the official release, please do not redistribute unpublished code, data, or models without permission.
 
----
 
-## Contact
-
-For questions, please contact:
-
-- Palash Yuvraj Ingle: palash@sejong.ac.kr
-- Young-Gab Kim: alwaysgabi@sejong.ac.kr
-
-Repository: https://github.com/palashngl/EnvGuard.git
